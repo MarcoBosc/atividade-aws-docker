@@ -4,7 +4,7 @@ resource "aws_launch_configuration" "my_launch_configuration" {
   image_id        = "ami-03c7d01cf4dedc891"
   instance_type   = "t2.micro"
   security_groups = [aws_security_group.my_security_group.id]
-  key_name        = "KeyPair"
+  key_name        = "MyKeyPair"
   user_data       = <<-EOF
               #!/bin/bash
               sudo yum update -y
@@ -28,7 +28,7 @@ resource "aws_launch_configuration" "my_launch_configuration" {
               cd /efs
               mkdir db_data && mkdir wp_data
               cd atividade-aws-docker
-              export rds_host=${aws_db_instance.my_db_instance.endpoint}
+              export rds_endpoint=${aws_db_instance.my_db_instance.endpoint}
               docker-compose up        
               EOF
 }
