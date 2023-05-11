@@ -6,7 +6,7 @@ services:
       - 80:80
     restart: always
     environment:
-      - WORDPRESS_DB_HOST=my-db-instance.cpvw7pjlvoor.us-east-1.rds.amazonaws.com
+      - WORDPRESS_DB_HOST=$rds_endpoint
       - WORDPRESS_DB_USER=admin
       - WORDPRESS_DB_PASSWORD=wordpress
       - WORDPRESS_DB_NAME=wordpress
@@ -22,7 +22,7 @@ services:
       - MYSQL_USER=admin
       - MYSQL_PASSWORD=wordpress
       - MYSQL_ROOT_PASSWORD=wordpress
-      - MYSQL_HOST=my-db-instance.cpvw7pjlvoor.us-east-1.rds.amazonaws.com
+      - MYSQL_HOST=$rds_endpoint
       - MYSQL_PORT=3306
 volumes:
   wp_data:
