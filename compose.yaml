@@ -22,7 +22,7 @@ services:
       - MYSQL_USER=admin
       - MYSQL_PASSWORD=wordpress
       - MYSQL_ROOT_PASSWORD=wordpress
-      - MYSQL_HOST=$(cat /efs/atividade-aws-docker/endpoint.txt)
+      - MYSQL_HOST=my-db-instance.cxbrx5atrb5y.us-east-1.rds.amazonaws.com
       - MYSQL_PORT=3306
 volumes:
   wp_data:
