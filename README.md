@@ -135,6 +135,10 @@ Após isso basta colar o DNS no seu navegador para acessar a aplicação:
 
 ![image](https://github.com/MarcoBosc/akigaraiow/assets/105826129/4b1e3ec5-2455-4040-be26-a10069ce1229)
 
+## Erro DNS bad-gateway
+
+![image](https://github.com/MarcoBosc/atividade-aws-docker/assets/105826129/f817da70-ea6c-4c73-ac52-82837e0b7d9f)
+
 
 ## IMPORTANTE
 Caso seja necessário realizar alguma alteração na aplicação, segue outros comandos terraform úteis para suas modificações.
