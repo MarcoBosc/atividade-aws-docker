@@ -1,8 +1,9 @@
-# O que é terraform:
-Terraform é uma ferramenta de código aberto usada para automatizar a criação e configuração de infraestrutura de TI. Com ele, é possível escrever código para definir recursos, como servidores, bancos de dados e redes, e o Terraform se encarrega de criar esses recursos de maneira automatizada. Isso permite que as equipes de TI gerenciem a infraestrutura de forma mais eficiente e consistente, reduzindo erros e aumentando a produtividade.
-
 # Tutorial para criação de aplicação na AWS com Terraform
 Este tutorial irá guiá-lo passo a passo na criação de uma aplicação na AWS utilizando o Terraform. A aplicação será composta por vários recursos, incluindo um Internet Gateway, NAT Gateway, Amazon Elastic File System (EFS), Amazon Relational Database Service (RDS), Auto Scaling, Application Load Balancer (ALB) e um container com Wordpress na porta 80.
+
+### O que é terraform:
+Terraform é uma ferramenta de código aberto usada para automatizar a criação e configuração de infraestrutura de TI. Com ele, é possível escrever código para definir recursos, como servidores, bancos de dados e redes, e o Terraform se encarrega de criar esses recursos de maneira automatizada. Isso permite que as equipes de TI gerenciem a infraestrutura de forma mais eficiente e consistente, reduzindo erros e aumentando a produtividade.
+
 
 # Pré-requisitos
 Antes de começar, você precisará ter uma conta na AWS e instalar o Terraform em seu computador. Certifique-se de ter as credenciais da AWS configuradas em sua máquina para poder provisionar os recursos, é interessante possuir o git na máquina para facilitar o provisionamento da aplicação. 
