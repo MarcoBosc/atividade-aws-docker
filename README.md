@@ -15,7 +15,7 @@ Você pode configurar suas credenciais com o comando:
    ```
 Você também precisa ter o aws cli configurado com suas credenciais de acesso e para a região us-east-1(Você pode saber mais sobre a configuração do aws cli clicando [aqui](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure..html)).
 
-É imoportante criar um par de chaves na aws para iniciar o provisionamento e ter acesso as instâncias caso necessário. Para criar um par de chaves na AWS pelo CLI, você pode usar o seguinte comando:
+É importante criar um par de chaves na aws para iniciar o provisionamento e ter acesso as instâncias caso necessário. Para criar um par de chaves na AWS pelo CLI, você pode usar o seguinte comando:
 `AWS CLI
 aws ec2 create-key-pair --key-name my-key-pair --query 'KeyMaterial' --output text > my-key-pair.pem
 `
@@ -67,7 +67,7 @@ Após isso iniciará o processo de provisionamento do ambiente com base na infra
 ## O processo de execução irá seguir as seguintes etapas:
 
 ### 1. Criar a VPC.
- O primeiro recuso a ser provisionado será a VPC. Ela será usada para criar uma rede virtual personalizada que pode ser conectada com outros recursos da AWS, como instâncias EC2, RDS, EFS, ELB, entre outros. Nessa fase também serão criadas as subnets públicas e privadas necessárias para a aplicação. O arquivo responsável pela criação da VPC e sub-redes públicas e privadas é o _network.tf_.
+ O primeiro recurso a ser provisionado será a VPC. Ela será usada para criar uma rede virtual personalizada que pode ser conectada com outros recursos da AWS, como instâncias EC2, RDS, EFS, ELB, entre outros. Nessa fase também serão criadas as subnets públicas e privadas necessárias para a aplicação. O arquivo responsável pela criação da VPC e sub-redes públicas e privadas é o _network.tf_.
 
 ### 2. Provisionar o Internet Gateway.
 Após isso, será provisionado o Internet Gateway. Que será usado para permitir que nossa aplicação se comunique com a Internet. Ainda com responsabilidade do arquivo _network.tf_.
@@ -181,12 +181,12 @@ volumes:
   wp_data:
   db_data:' > compose.yaml
 ```
-Aqui será adicionado ao repositório os arquivos necessários para execução dos containers docker(docker-compose.yaml), onde os mesmos serão movidos para dentro do ponto de montagem do efs para dentro de um arquivo chamado compose.yaml.
+Aqui será adicionado ao diretório os arquivos necessários para execução dos containers docker(docker-compose.yaml), onde os mesmos serão movidos para o ponto de montagem do efs para dentro de um arquivo chamado compose.yaml.
 
 ```bash
 docker-compose up 
 ```
-Por fim será inicializado os containeres que irão virtualizar a aplicação **Wordpress** e **Mysql**.
+Por fim serão inicializado os containeres que irão virtualizar as aplicações **Wordpress** e **Mysql**.
 
 
 ### 8. Provisionar o ALB.
@@ -207,7 +207,7 @@ aws elbv2 describe-load-balancers --query 'LoadBalancers[*].DNSName' --output te
 ```
 ![image](https://github.com/MarcoBosc/akigaraiow/assets/105826129/26694534-b917-4637-a517-609dee392261)
 
-Após isso basta colar o DNS no seu navegador para acessar a aplicação:
+Após isto basta colar o DNS no seu navegador para acessar a aplicação:
 
 ![image](https://github.com/MarcoBosc/akigaraiow/assets/105826129/4b1e3ec5-2455-4040-be26-a10069ce1229)
 
