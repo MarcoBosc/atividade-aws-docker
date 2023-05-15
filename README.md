@@ -17,10 +17,9 @@ Você também precisa ter o aws cli configurado com suas credenciais de acesso e
 
 É importante criar um par de chaves na aws para iniciar o provisionamento e ter acesso as instâncias caso necessário. Para criar um par de chaves na AWS pelo CLI, você pode usar o seguinte comando:
 `AWS CLI
-aws ec2 create-key-pair --key-name my-key-pair --query 'KeyMaterial' --output text > my-key-pair.pem
+aws ec2 create-key-pair --key-name KeyPair --query 'KeyMaterial' --output text > KeyPair.pem
 `
-Nesse comando, substitua my-key-pair pelo nome que deseja dar ao par de chaves. O comando irá gerar um arquivo my-key-pair.pem que contém a chave privada.
-
+Nesse comando, substitua my-key-pair pelo nome que deseja dar ao par de chaves. O comando irá gerar um arquivo my-key-pair.pem que contém a chave privada. É interessante deixar o mesmo nome de chave que está no código _autoscailing.tf_, caso deseje criar sua chave com outro nome, é necessário alterar o nome da chave no script, substituindo o ```key_name = "KeyPair"``` para ```key_name = "Nome_da_sua_chave"```.
 
 Se preferir, você pode gerar o par de chaves na interface da AWS também. Para isso, acesse o serviço EC2, vá em "Key Pairs" e clique em "Create Key Pair". Escolha um nome para o par de chaves e faça o download do arquivo .pem contendo a chave privada.
 ### 1 -
@@ -210,6 +209,9 @@ aws elbv2 describe-load-balancers --query 'LoadBalancers[*].DNSName' --output te
 Após isto basta colar o DNS no seu navegador para acessar a aplicação:
 
 ![image](https://github.com/MarcoBosc/akigaraiow/assets/105826129/4b1e3ec5-2455-4040-be26-a10069ce1229)
+
+### Observações:
+Em caso do erro 502 - Bad Gateway, pode ser necessário esperar alguns minutos até que as instâncias estejam 100% online para que o serviço funcione corretamente e não gere nenhum tipo erro.
 
 ## IMPORTANTE
 Caso seja necessário realizar alguma alteração na aplicação, segue outros comandos terraform úteis para suas modificações.
