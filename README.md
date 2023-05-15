@@ -67,22 +67,25 @@ Após isso iniciará o processo de provisionamento do ambiente com base na infra
 ## O processo de execução irá seguir as seguintes etapas:
 
 ### 1. Criar a VPC.
- O primeiro recuso a ser provisionado será a VPC. Ela será usada para criar uma rede virtual personalizada que pode ser conectada com outros recursos da AWS, como instâncias EC2, RDS, EFS, ELB, entre outros. Nessa fase também serão criadas as subnets públicas e privadas necessárias para a aplicação.
+ O primeiro recuso a ser provisionado será a VPC. Ela será usada para criar uma rede virtual personalizada que pode ser conectada com outros recursos da AWS, como instâncias EC2, RDS, EFS, ELB, entre outros. Nessa fase também serão criadas as subnets públicas e privadas necessárias para a aplicação. O arquivo responsável pela criação da VPC e sub-redes públicas e privadas é o _network.tf_.
 
 ### 2. Provisionar o Internet Gateway.
-Após isso, será provisionado o Internet Gateway. Que será usado para permitir que nossa aplicação se comunique com a Internet.
+Após isso, será provisionado o Internet Gateway. Que será usado para permitir que nossa aplicação se comunique com a Internet. Ainda com responsabilidade do arquivo _network.tf_.
 
 ### 3. Provisionar o NAT Gateway.
-Em seguida, será criado um NAT Gateway. Ele será usado para permitir que nossos recursos privados na VPC acessem a Internet por meio de uma subnet pública.
+Em seguida, será criado um NAT Gateway. Ele será usado para permitir que nossos recursos privados na VPC acessem a Internet por meio de uma subnet pública. O NAT Gateway será privisionado pelo arquivo _private-network.tf_.
 
-### 4. Provisionar o EFS.
-O próximo recurso criado é o EFS. Ele será usado para armazenar os arquivos de criação e volumes do **Wordpress** da nossa aplicação. Bem como será o responsável por compartilhar os arquivos entre todas as instancias.
+### 4. Criar os Security Groups
+O arquivo _security-groups_ irá criar os security groups e suas regras. Servirão como recursos de segurança na nuvem usados para controlar o tráfego de entrada e saída das instâncias ou recursos da nuvem. Eles funcionam como uma espécie de firewall virtual que permite especificar quais protocolos, portas e endereços IP podem acessar um determinado recurso na nuvem.
 
-### 5. Provisionar o RDS.
-Agora, será provisionado um Amazon RDS com mysql para armazenar os dados do container **Wordpress** na nossa aplicação.
+### 5. Provisionar o EFS.
+O próximo recurso criado é o EFS. Ele será usado para armazenar os arquivos de criação e volumes do **Wordpress** da nossa aplicação. Bem como será o responsável por compartilhar os arquivos entre todas as instancias. O arquivo responsável pela criação do efs e seu security group é o _EFS.tf_.
 
-### 6. Provisionar o Auto Scaling.
-Agora, será criado o Auto Scaling. Ele será usado para aumentar ou diminuir automaticamente o número de instâncias da nossa aplicação com base na demanda. Ele também será o responsável por carregar dentro do launch template o **user data** de nossas máquinas virtuais que irão executar os containers.
+### 6. Provisionar o RDS.
+Agora, será provisionado um Amazon RDS com mysql para armazenar os dados do container **Wordpress** na nossa aplicação. O arquivo que irá criar o RDS e seu grupo de subredes é o _mysql-rds.tf_.
+
+### 7. Provisionar o Auto Scaling.
+Após a finalização do recurso RDS e obtenção do endpoint do mesmo, será criado o Auto Scaling a partir do arquivo _autoscaling.tf_. Ele será usado para aumentar ou diminuir automaticamente o número de instâncias da nossa aplicação com base na demanda. Ele também será o responsável por carregar dentro do launch template o **user data** de nossas máquinas virtuais que irão executar os containers.
 ```bash
 #!/bin/bash
               yum update -y
@@ -186,8 +189,8 @@ docker-compose up
 Por fim será inicializado os containeres que irão virtualizar a aplicação **Wordpress** e **Mysql**.
 
 
-### 7. Provisionar o ALB.
-Por último, será criado o Application Load Balancer (ALB). Ele será usado para distribuir o tráfego entre as instâncias da nossa aplicação.
+### 8. Provisionar o ALB.
+Por último, será criado o Application Load Balancer (ALB) e target groups pelo arquivo _ALB.tf_. Ele será usado para distribuir o tráfego entre as instâncias da nossa aplicação.
 
 ### A saída esperada para o comando **terraform apply plan.out**:
 O terraform irá mostrar uma mensagem de sucesso da aplicação juntamente com a quantidade de itens provisionados. E logo abaixo os outputs configurados no terraform para mostrar as saídas necessárias.
